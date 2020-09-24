@@ -57,6 +57,10 @@ local bottom_panel = function(s)
 	local bottom_panel_height = dpi(48)
 	local bottom_panel_margins = dpi(5)
 
+	local shape = function(cr, w, h)
+		gears.shape.partially_rounded_rect(cr, w, h, true, true, false, false, beautiful.groups_radius)
+	end
+
 	local panel = awful.popup {
 		widget = {
 			{
@@ -79,9 +83,7 @@ local bottom_panel = function(s)
 				require('widget.xdg-folders.trash')(),
 			},
 			bg = beautiful.background,
-			shape = function(cr, w, h)
-				gears.shape.partially_rounded_rect(cr, w, h, true, true, false, false, beautiful.groups_radius)
-			end,
+			shape = shape,
 			widget = wibox.container.background
 		},
 		type = 'dock',
@@ -91,7 +93,7 @@ local bottom_panel = function(s)
 		height = bottom_panel_height,
 		maximum_height = bottom_panel_height,
 		placement = awful.placement.bottom,
-		shape = gears.shape.rectangle,
+		shape = shape,
 		bg = beautiful.transparent
 	}
 
